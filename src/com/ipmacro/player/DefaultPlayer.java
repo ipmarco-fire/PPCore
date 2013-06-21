@@ -1,4 +1,4 @@
-package com.ipmacro.ppcore;
+package com.ipmacro.player;
 
 import android.content.Context;
 import android.media.MediaPlayer;
