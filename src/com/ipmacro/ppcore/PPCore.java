@@ -1,4 +1,4 @@
-package com.ipmacro;
+package com.ipmacro.ppcore;
 
 import java.util.Date;
 import java.util.LinkedList;
