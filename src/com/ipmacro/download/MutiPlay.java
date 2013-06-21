@@ -1,4 +1,4 @@
-package com.ipmacro.ppcore;
+package com.ipmacro.download;
 
 import java.util.ArrayList;
 import java.util.List;

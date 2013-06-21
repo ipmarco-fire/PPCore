@@ -1,9 +1,9 @@
-package com.ipmacro.ppcore;
+package com.ipmacro.download;
 
 import android.content.Context;
 
-import com.ipmacro.PPCore;
-import com.ipmacro.Rfp;
+import com.ipmacro.ppcore.PPCore;
+import com.ipmacro.ppcore.Rfp;
 
 public class RfpDownload extends BaseDownload {
 	String mFileId;

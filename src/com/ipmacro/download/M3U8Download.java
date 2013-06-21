@@ -1,4 +1,4 @@
-package com.ipmacro.ppcore;
+package com.ipmacro.download;
 
 import android.content.Context;
 

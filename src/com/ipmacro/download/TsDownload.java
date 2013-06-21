@@ -1,8 +1,8 @@
-package com.ipmacro.ppcore;
+package com.ipmacro.download;
 
 import android.content.Context;
 
-import com.ipmacro.TsApple;
+import com.ipmacro.ppcore.TsApple;
 
 public class TsDownload extends BaseDownload {
 

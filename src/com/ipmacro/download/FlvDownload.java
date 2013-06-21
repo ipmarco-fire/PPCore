@@ -1,8 +1,8 @@
-package com.ipmacro.ppcore;
-
-import com.ipmacro.FlvApple;
+package com.ipmacro.download;
 
 import android.content.Context;
+
+import com.ipmacro.ppcore.FlvApple;
 
 public class FlvDownload extends BaseDownload {
 
