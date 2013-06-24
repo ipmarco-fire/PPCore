@@ -69,14 +69,15 @@ public class PPCore {
 		if (!nativeLogin3(Token)) {
 			return false;
 		}
+		mRun = true;
 		Log.i("PPCore", "Login OK");
+		Log.i("SN", "" + getSN());
+		Log.i("Life", "" + getLife());
+		Date d = new Date();
+		d.setTime(getExpire() * (long) 1000);
+		Log.i("Expire", d.toString());
 		Log.i("HttpUrl", getHttpUrl());
 		Log.i("RtspUrl", getRtspUrl());
-		Date d = new Date();
-		d.setTime(getExpire() * 1000);
-		Log.i("Expire", d.toString());
-		Log.i("Life", "" + getLife());
-		mRun = true;
 		mThread = new TaskThread();
 		mThread.setName("PPCore");
 		mThread.start();
