@@ -43,7 +43,7 @@ public abstract class BasePlayer {
 		mCallback = cb;
 	};
 
-	void fireCallback(State st) {
+	public void fireCallback(State st) {
 		if (mCallback != null) {
 			mCallback.stateChanged(st);
 		}

@@ -26,10 +26,10 @@ public class BaseDownload {
 
 	}
 
-	public String getSourceUrl(){
+	public String getSourceUrl() {
 		return mPlayUrl;
 	}
-	
+
 	public String getPlayUrl() {
 		return mPlayUrl;
 	}

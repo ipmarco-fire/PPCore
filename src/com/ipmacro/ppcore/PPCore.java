@@ -40,7 +40,7 @@ public class PPCore {
 		return nativeGetPwd();
 	}
 
-	static byte[] mMutex = new byte[1];
+	public static byte[] mMutex = new byte[1];
 	private static boolean mRun;
 
 	private static class TaskThread extends Thread {
@@ -181,11 +181,11 @@ public class PPCore {
 		return false;
 	}
 
-	static abstract class Task {
-		abstract void oneClick();
+	public static abstract class Task {
+		public abstract void oneClick();
 	}
 
-	static LinkedList<Task> mTaskList = new LinkedList<Task>();
+	public static LinkedList<Task> mTaskList = new LinkedList<Task>();
 
 	private static void oneClick() {
 		nativeOneClick();
@@ -194,7 +194,7 @@ public class PPCore {
 		}
 	}
 
-	static Handler mHandler = new Handler() {
+	public static Handler mHandler = new Handler() {
 		public void handleMessage(Message msg) {
 		}
 	};

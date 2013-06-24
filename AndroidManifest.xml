@@ -7,51 +7,13 @@
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
-
-    <uses-sdk
-        android:minSdkVersion="16"
-        android:targetSdkVersion="16" />
-
     <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />
 
-    <application
-        android:name="com.ipmacro.app.MyApplication"
-        android:debuggable="true"
-        android:icon="@drawable/ic_launcher"
-        android:label="@string/app_name" >
-        <activity
-            android:name="com.ipmacro.Test.MainActivity"
-            android:label="@string/app_name" >
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
+    <uses-sdk
+        android:minSdkVersion="10"
+        android:targetSdkVersion="10" />
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
-        <activity
-            android:name="com.ipmacro.Test.LoginActivity"
-            android:label="@string/app_name" />
-        <activity
-            android:name="com.ipmacro.Test.RlpDownloadActivity"
-            android:label="@string/app_name" />
-        <activity
-            android:name="com.ipmacro.Test.AndPlayerActivity"
-            android:label="@string/app_name" />
-        <activity
-            android:name="com.ipmacro.Test.LiveActivity"
-            android:label="@string/app_name" />
-        <activity
-            android:name="com.ipmacro.Test.FlvAppleActivity"
-            android:label="@string/title_activity_flv_apple" >
-        </activity>
-        <activity
-            android:name="com.ipmacro.Test.TsAppleActivity"
-            android:label="@string/title_activity_ts_apple" >
-        </activity>
-        <activity
-            android:name="com.ipmacro.Test.MutiplayActivity"
-            android:label="@string/title_activity_mutiplay" >
-        </activity>
+    <application android:debuggable="true" >
     </application>
 
 </manifest>
