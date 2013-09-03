@@ -4,9 +4,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 import android.content.Context;
+import android.os.Handler;
 import android.util.Log;
 
 public class MutiPlay {
+	private Handler handler = new Handler();
+	public static boolean log = true;
+
+	public static final String TAG = "ppcore";
 	public static final int MAX_MUTIPLAY = 3;
 	private static final int TYPE_M3U8 = 8;
 	private static final int TYPE_FLV = 9;
@@ -31,13 +36,18 @@ public class MutiPlay {
 
 	public int getProgress() {
 		int p = 0;
+		String tip = "";
 		for (int i = 0; i < list.size(); i++) {
 			int p1 = list.get(i).getProgress();
-			Log.e("ppp", "i:" + i + "  p:" + p1);
+			int r = list.get(i).getRate() / 1024;
+
+			String s = list.get(i).getSourceUrl();
+			tip += "   i:" + i + "  p:" + p1 + "  r:" + r + " s:" + s;
 			if (p1 > p) {
 				p = p1;
 			}
 		}
+		i(tip + "   Progress:" + p);
 		return p;
 	}
 
@@ -166,20 +176,26 @@ public class MutiPlay {
 	}
 
 	public void addUrl(String playUrl, int mode) {
+		
 		if (list.size() >= MAX_MUTIPLAY) {
 			return;
 		}
-
+		w( "mode:" + mode+":playUrl:"+playUrl);
 		BaseDownload db = null;
 		switch (mode) {
 		case TYPE_M3U8:
 			db = new M3U8Download(context);
 			break;
 		case TYPE_FLV:
-			db = new M3U8Download(context);
+			db = new FlvDownload(context);
+
+			if (playUrl.indexOf(".tv.sohu.") > -1) {
+				parserSOHU(playUrl);
+			}
 			break;
 		case TYPE_TS:
 			db = new TsDownload(context);
+			break;
 		default:
 			break;
 		}
@@ -189,4 +205,17 @@ public class MutiPlay {
 		}
 	}
 
+	// 解析sohu的播放地址:
+	private void parserSOHU(final String url) {
+		Log.e(TAG, url);
+	}
+
+	private void i(String msg) {
+		if (log)
+			Log.i(TAG, msg);
+	}
+	private void w(String msg) {
+		if (log)
+			Log.i(TAG, msg);
+	}
 }
