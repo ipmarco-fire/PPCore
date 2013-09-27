@@ -26,9 +26,9 @@ public class PPCore {
 		if (mInited) {
 			return true;
 		}
-//		if (!detectWifi(Ctx)) {
-//			return false;
-//		}
+		if (!detectWifi(Ctx)) {
+			return false;
+		}
 		mInited = nativeInit(Ctx);
 		return mInited;
 	}
