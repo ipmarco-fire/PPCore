@@ -20,6 +20,7 @@ public class MutiPlay {
 	private Context context;
 	List<BaseDownload> list;
 	BaseDownload curDb;
+	BaseDownload oldDb;
 
 	public MutiPlay(Context c) {
 		context = c;
@@ -94,6 +95,9 @@ public class MutiPlay {
 	}
 
 	public String getSourceUrl() {
+		if (curDb != null) {
+			return curDb.getSourceUrl();
+		}
 		int p = 0;
 		String sourceUrl = "";
 		for (int i = 0; i < list.size(); i++) {
@@ -121,6 +125,34 @@ public class MutiPlay {
 		return "";
 	}
 
+	public String getPlayUrlAndStopOthers(){
+		if(oldDb != null){
+			oldDb.stop();oldDb = null;
+		}
+		if (curDb != null) {
+			return curDb.getPlayUrl();
+		}
+		int p = 0,max = 0;
+		String playUrl = "";
+		for (int i = 0; i < list.size(); i++) {
+			int p1 = list.get(i).getProgress();
+			if (p1 > p) {
+				p = p1;
+				max = i;
+			}
+		}
+		for (int i = 0; i < list.size(); i++) {
+			if(max == i){
+				curDb = list.get(i);
+				playUrl = list.get(i).getPlayUrl();
+			}else{
+				list.get(i).stop();
+			}
+		}
+		
+		return playUrl;
+	}
+	
 	public String getPlayUrl() {
 		if (curDb != null) {
 			return curDb.getPlayUrl();
@@ -163,7 +195,37 @@ public class MutiPlay {
 		return id;
 	}
 
+	public void setCurDBAndStopOthers(int id) {
+		if (curDb != null) {
+			curDb = list.get(id);
+			for (int i = 0; i < list.size(); i++) {
+				if (i != id) {
+					list.get(i).stop();
+				}
+			}
+		}
+	}
+
+	public void stopExceptCur(){
+		if(oldDb!=null){
+			oldDb.stop();
+			oldDb = null;
+		}
+		for (int i = 0; i < list.size(); i++) {
+			if(list.get(i) != curDb){
+				list.get(i).stop();
+			}else{
+				oldDb = curDb;
+			}
+		}
+		list.clear();
+		curDb = null;
+	}
+	
 	public void stop() {
+		if(oldDb != null){
+			oldDb.stop();oldDb = null;
+		}
 		for (int i = 0; i < list.size(); i++) {
 			list.get(i).stop();
 		}
@@ -176,11 +238,11 @@ public class MutiPlay {
 	}
 
 	public void addUrl(String playUrl, int mode) {
-		
+
 		if (list.size() >= MAX_MUTIPLAY) {
 			return;
 		}
-		w( "mode:" + mode+":playUrl:"+playUrl);
+		w("mode:" + mode + ":playUrl:" + playUrl);
 		BaseDownload db = null;
 		switch (mode) {
 		case TYPE_M3U8:
@@ -214,8 +276,21 @@ public class MutiPlay {
 		if (log)
 			Log.i(TAG, msg);
 	}
+
 	private void w(String msg) {
 		if (log)
 			Log.i(TAG, msg);
+	}
+	
+	public List<State> getStates(){
+		List<State> stateList = new ArrayList<State>();
+		if(oldDb!=null){
+			stateList.add(new State(-1,oldDb.getProgress(),oldDb.getRate(),oldDb.getSourceUrl()));
+		}
+		for (int i = 0; i < list.size(); i++) {
+			BaseDownload bd = list.get(i);
+			stateList.add(new State(i,bd.getProgress(),bd.getRate(),bd.getSourceUrl()));
+		}
+		return stateList;
 	}
 }
