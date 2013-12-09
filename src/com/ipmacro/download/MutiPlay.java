@@ -12,17 +12,34 @@ public class MutiPlay {
 	public static boolean log = true;
 
 	public static final String TAG = "ppcore";
-	public static final int MAX_MUTIPLAY = 3;
+	public static final int MAX_MUTIPLAY = 1;
 	private static final int TYPE_M3U8 = 8;
 	private static final int TYPE_FLV = 9;
 	private static final int TYPE_TS = 5;
+	private static final int TYPE_FY = 10;
+	
 
 	private Context context;
 	List<BaseDownload> list;
 	BaseDownload curDb;
 	BaseDownload oldDb;
+	int curId = 0;
+	
+	
+	
+	public BaseDownload getCurDb() {
+        return curDb;
+    }
 
-	public MutiPlay(Context c) {
+    public int getCurId() {
+        return curId;
+    }
+
+    public void setCurId(int curId) {
+        this.curId = curId;
+    }
+
+    public MutiPlay(Context c) {
 		context = c;
 		list = new ArrayList<BaseDownload>();
 
@@ -144,6 +161,7 @@ public class MutiPlay {
 		for (int i = 0; i < list.size(); i++) {
 			if(max == i){
 				curDb = list.get(i);
+				curId = i;
 				playUrl = list.get(i).getPlayUrl();
 			}else{
 				list.get(i).stop();
@@ -258,6 +276,8 @@ public class MutiPlay {
 		case TYPE_TS:
 			db = new TsDownload(context);
 			break;
+		case TYPE_FY:
+			db = new FyDownload(context);
 		default:
 			break;
 		}

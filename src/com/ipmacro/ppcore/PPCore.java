@@ -84,6 +84,10 @@ public class PPCore {
 		return true;
 	}
 
+	public static void DbgMsg(String Msg) {
+		nativeDbgMsg(Msg);
+	}
+
 	public static int getSN() {
 		if (!mRun) {
 			return 0;
@@ -221,6 +225,8 @@ public class PPCore {
 	private static native String nativeGetRtspUrl();
 
 	private static native String nativeGetHttpUrl();
+
+	private static native void nativeDbgMsg(String Msg);
 
 	static {
 		System.loadLibrary("PPCoreJni");
